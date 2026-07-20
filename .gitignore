@@ -1,0 +1,33 @@
+# Build output
+src/synth/Debug/
+src/synth/Release/
+
+# Intermediate build files
+*.o
+*.d
+*.elf
+*.hex
+*.eep
+*.map
+*.lss
+*.lst
+*.srec
+
+# Debug/programming files
+*.obj
+*.pdb
+
+# AVRDUDE output
+*.log
+
+# User-specific Visual Studio files
+src/synth/.vs/
+*.user
+*.suo
+*.VC.db
+*.VC.opendb
+
+# Temporary files
+*.tmp
+*.bak
+*.cache
