@@ -5,36 +5,8 @@
 #include <stdint.h>
 #include <stdlib.h>
 
+#include "utils/adc.h"
 #include "utils/lcd.h"
-
-//------------------------------------------------------
-// ADC Initialization
-//------------------------------------------------------
-void InitADC(void)
-{
-	// AVCC reference
-	ADMUX = (1 << REFS0);
-
-	// Enable ADC, Prescaler = 128
-	ADCSRA = (1 << ADEN) | (1 << ADPS2) | (1 << ADPS1) | (1 << ADPS0);
-}
-
-//------------------------------------------------------
-// Read ADC Channel
-//------------------------------------------------------
-uint16_t ReadADC(uint8_t channel)
-{
-	channel &= 0x0F;
-
-	ADMUX = (ADMUX & 0xF0) | channel;
-
-	ADCSRA |= (1 << ADSC);
-
-	while (ADCSRA & (1 << ADSC))
-		;
-
-	return ADC;
-}
 
 //------------------------------------------------------
 // Convert percentage to LED bar graph
@@ -95,28 +67,6 @@ void ClearTone()
 {
 	PORTC = 0x00;
 	SetTone(0);
-}
-
-//------------------------------------------------------
-// Convert Potentiometer input to Potentiometer Percent
-//------------------------------------------------------
-uint8_t ADCToPercent(uint16_t adc_value)
-{
-	return (adc_value * 100UL) / 1023UL;
-}
-
-//------------------------------------------------------
-// Convert Potentiometer Percent to Frequency output
-//------------------------------------------------------
-uint16_t ADCToFrequency(uint16_t adc)
-{
-	const uint16_t min_freq = 220;
-	const uint16_t octaves = 2;
-
-	float position = adc / 1023.0f;
-	float freq = min_freq * powf(2.0f, position * octaves);
-
-	return (uint16_t)(freq + 0.5f);
 }
 
 //------------------------------------------------------

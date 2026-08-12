@@ -125,6 +125,12 @@
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="utils\adc.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="utils\adc.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="utils\lcd.c">
       <SubType>compile</SubType>
     </Compile>
